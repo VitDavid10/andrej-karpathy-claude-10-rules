@@ -1,0 +1,31 @@
+{
+  "name": "andrej-karpathy-claude-rules",
+  "id": "andrej-karpathy-claude-rules",
+  "owner": {
+    "name": "VitDavid10"
+  },
+  "metadata": {
+    "description": "12 behavioral rules to reduce common LLM coding mistakes. Built on Karpathy's principles, extended with Anthropic best practices.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "andrej-karpathy-claude-rules",
+      "source": "./",
+      "description": "Think Before Coding, Simplicity, Surgical Changes, Goal-Driven Execution, Honesty, Planning, Verification, Errors, Subagents, Elegance, Model Optimization, Compaction",
+      "version": "1.0.0",
+      "author": {
+        "name": "VitDavid10"
+      },
+      "keywords": [
+        "guidelines",
+        "best-practices",
+        "coding",
+        "karpathy",
+        "claude-code",
+        "cursor"
+      ],
+      "category": "workflow"
+    }
+  ]
+}

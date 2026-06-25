@@ -167,8 +167,17 @@ cp CLAUDE.md ~/.claude/CLAUDE.md
 cp CLAUDE.md /your-project/CLAUDE.md
 ```
 
+### Claude Code — as a skill / plugin
+The repo ships a skill at `skills/claude-code-rules/SKILL.md` and the `.claude-plugin/` manifests, so it can be installed as a plugin from a marketplace or invoked as a skill.
+
 ### Cursor
-Copy `CURSOR.md` to `.cursor/rules/guidelines.mdc` inside your project, or paste the contents into your existing rules file.
+Copy `.cursor/rules/claude-code-rules.mdc` into your project (it has `alwaysApply: true`), or paste `CURSOR.md` into your existing rules file.
+
+---
+
+## Examples
+
+See **[EXAMPLES.md](EXAMPLES.md)** for a wrong-vs-right example of every rule, using a real-time multiplayer game server (Node + WebSocket).
 
 ---
 

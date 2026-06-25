@@ -1,0 +1,11 @@
+{
+  "name": "andrej-karpathy-claude-rules",
+  "description": "12 behavioral rules to reduce common LLM coding mistakes. Built on Andrej Karpathy's principles, extended with Anthropic best practices.",
+  "version": "1.0.0",
+  "author": {
+    "name": "VitDavid10"
+  },
+  "license": "MIT",
+  "keywords": ["guidelines", "best-practices", "coding", "karpathy", "claude-code", "cursor"],
+  "skills": ["./skills/claude-code-rules"]
+}
