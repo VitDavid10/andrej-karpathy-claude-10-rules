@@ -95,16 +95,7 @@ When something fails:
 - Find the root cause — don't patch around it.
 - Fix CI tests that fail without asking what they mean.
 
-## 9. Subagents
-
-**Delegate research and exploration.**
-
-For complex problems, don't saturate the main context with investigation. Delegate:
-- Codebase exploration and analysis to subagents.
-- Research and multi-step lookups to subagents.
-- Push maximum computational load to subagents on hard problems.
-
-## 10. Elegance
+## 9. Elegance
 
 **Pause before delivering non-trivial work.**
 
@@ -112,7 +103,7 @@ Ask: "Is there a more elegant solution?" If the implementation feels rushed or f
 
 Only applies to non-trivial changes — don't over-engineer simple fixes.
 
-## 11. Model Optimization
+## 10. Model Optimization
 
 **Use the right model for the task.**
 
@@ -120,14 +111,3 @@ Only applies to non-trivial changes — don't over-engineer simple fixes.
 - On **Sonnet** failing 2+ times on the same problem, or facing deep architectural reasoning across many files: warn → *"Consider `/model opus`."*
 - Don't suggest upgrading just because the task is long — only when it requires complex multi-file reasoning.
 
-## 12. Compaction
-
-**Preserve what matters when the context window compresses.**
-
-When the conversation is compacted (manually or automatically), ensure the summary retains:
-- Current task and its status (in progress, blocked, done)
-- Modified files and relevant paths
-- Errors encountered and how they were resolved
-- Pending TODOs and next steps
-- Architecture or design decisions made
-- Active git branch and feature in development

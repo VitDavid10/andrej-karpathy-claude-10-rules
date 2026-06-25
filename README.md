@@ -29,9 +29,9 @@ The four principles cover *how* the model writes code. Three more classes of pro
 
 **Speed vs. clarity.** Charging ahead *feels* efficient, but when the model acts on a task it only half-understood, it burns tokens building the wrong thing — then burns more undoing it. For anything complex, clarifying and planning first is cheaper than redoing. → rule **6. Planning**.
 
-**The model is a resource too.** Using a heavyweight model for a one-line change wastes money; under-powering a deep multi-file refactor wastes time. The right choice isn't fixed — it should be picked, and switched, per task. Making that explicit keeps both cost and capability in check. → rule **11. Model Optimization**.
+**The model is a resource too.** Using a heavyweight model for a one-line change wastes money; under-powering a deep multi-file refactor wastes time. The right choice isn't fixed — it should be picked, and switched, per task. Making that explicit keeps both cost and capability in check. → rule **10. Model Optimization**.
 
-The remaining rules close predictable gaps in verification, error handling, context use, and quality:
+The remaining rules close predictable gaps in verification, error handling, and quality:
 
 | # | Principle | What it prevents |
 |---|---|---|
@@ -39,10 +39,8 @@ The remaining rules close predictable gaps in verification, error handling, cont
 | 6 | **Planning** | Diving into a multi-file change with no plan, then backtracking |
 | 7 | **Verification** | Marking a task "done" without running anything |
 | 8 | **Errors** | Stopping at the first error and asking the user to fix it |
-| 9 | **Subagents** | Saturating the main context with exploration and search noise |
-| 10 | **Elegance** | Shipping the first rushed solution instead of a clean one |
-| 11 | **Model Optimization** | Burning Opus tokens on trivial tasks, or under-powering hard ones |
-| 12 | **Compaction** | Losing critical state (files, decisions, TODOs) when context compresses |
+| 9 | **Elegance** | Shipping the first rushed solution instead of a clean one |
+| 10 | **Model Optimization** | Burning Opus tokens on trivial tasks, or under-powering hard ones |
 
 ---
 
@@ -139,16 +137,7 @@ When something fails:
 - Find the root cause — don't patch around it.
 - Fix CI tests that fail without asking what they mean.
 
-### 9. Subagents
-
-**Delegate research and exploration.**
-
-For complex problems, don't saturate the main context with investigation. Delegate:
-- Codebase exploration and analysis to subagents.
-- Research and multi-step lookups to subagents.
-- Push maximum computational load to subagents on hard problems.
-
-### 10. Elegance
+### 9. Elegance
 
 **Pause before delivering non-trivial work.**
 
@@ -156,25 +145,13 @@ Ask: "Is there a more elegant solution?" If the implementation feels rushed or f
 
 Only applies to non-trivial changes — don't over-engineer simple fixes.
 
-### 11. Model Optimization
+### 10. Model Optimization
 
 **Use the right model for the task.**
 
 - On **Opus** with a simple task (chat, question, minor change, code search): warn once → *"This doesn't need Opus, use `/model sonnet` to save tokens."*
 - On **Sonnet** failing 2+ times on the same problem, or facing deep architectural reasoning across many files: warn → *"Consider `/model opus`."*
 - Don't suggest upgrading just because the task is long — only when it requires complex multi-file reasoning.
-
-### 12. Compaction
-
-**Preserve what matters when the context window compresses.**
-
-When the conversation is compacted (manually or automatically), ensure the summary retains:
-- Current task and its status (in progress, blocked, done)
-- Modified files and relevant paths
-- Errors encountered and how they were resolved
-- Pending TODOs and next steps
-- Architecture or design decisions made
-- Active git branch and feature in development
 
 ---
 
