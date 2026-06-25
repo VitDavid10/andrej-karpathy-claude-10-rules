@@ -2,7 +2,7 @@
 
 > Behavioral guidelines to eliminate the most common LLM coding mistakes.
 
-A drop-in `CLAUDE.md` / Cursor ruleset that makes the model **think before coding, change only what it must, and prove its work**. Built on [Andrej Karpathy's LLM coding guidelines](https://github.com/multica-ai/andrej-karpathy-skills), extended with [Anthropic's official Claude Code best practices](https://docs.anthropic.com/en/docs/claude-code) and refined through production use building real-time multiplayer games (WebSocket servers, Solana blockchain).
+A drop-in `CLAUDE.md` / Cursor ruleset that makes the model **think before coding, change only what it must, and prove its work**. Built on [Andrej Karpathy's LLM coding guidelines](https://github.com/multica-ai/andrej-karpathy-skills), extended with [Anthropic's official Claude Code best practices](https://docs.anthropic.com/en/docs/claude-code).
 
 > *"Models make wrong assumptions and keep going without checking. They don't handle confusion or ask for clarification."* — Andrej Karpathy
 
