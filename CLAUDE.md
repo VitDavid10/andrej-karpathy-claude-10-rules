@@ -5,55 +5,138 @@
 
 ---
 
-## Principles
+## 1. Think Before Coding
 
-- **Simplicity**: minimal changes, only what's needed. No features beyond what was asked, no abstractions for single-use code, no error handling for impossible scenarios. If 200 lines could be 50, rewrite it.
-- **No laziness**: find root causes, no temp fixes. Senior engineer standard before delivering.
-- **Honesty**: if you don't know, say so. If unsure, state it upfront. No hallucinating. Be self-critical.
+**Don't assume. Don't hide confusion. Surface tradeoffs.**
 
-## Surgical Changes
+Before implementing anything:
+- State your assumptions explicitly. If uncertain, ask.
+- If multiple interpretations exist, present them — don't pick silently.
+- If a simpler approach exists, say so. Push back when warranted.
+- If something is unclear, stop. Name what's confusing. Ask.
 
-When editing existing code: don't improve adjacent code, comments, or formatting. Match existing style. Remove imports/variables/functions that YOUR changes made unused — but don't remove pre-existing dead code (flag it instead). Every changed line should trace directly to the user's request.
+## 2. Simplicity First
 
-## Planning
+**Minimum code that solves the problem. Nothing speculative.**
 
-- Non-trivial task (multiple files, architecture decisions, ambiguity): present plan BEFORE touching code — (1) root cause/goal, (2) changes with files, (3) open questions. Wait for validation.
-- Plan must be specific enough for the user to spot flaws without reading code.
-- Vague instructions → verifiable criteria. Multiple interpretations → present all of them.
-- If unclear: ask. If something goes wrong: STOP and replan.
-- Simple/obvious changes: implement directly.
+- No features beyond what was asked.
+- No abstractions for single-use code.
+- No "flexibility" or "configurability" that wasn't requested.
+- No error handling for impossible scenarios.
+- If you write 200 lines and it could be 50, rewrite it.
 
-## Task Management
+Ask yourself: "Would a senior engineer say this is overcomplicated?" If yes, simplify.
 
-- Write plan in `tasks/todo.md`, mark items complete as you go.
+## 3. Surgical Changes
 
-## Verification
+**Touch only what you must. Clean up only your own mess.**
 
-- Never mark done without proving it works. Test edge cases, run tests, check logs.
-- Transform tasks into verifiable goals: "fix the bug" → "write a test that reproduces it, then make it pass".
-- Filter: "Would a senior engineer approve this?"
+When editing existing code:
+- Don't "improve" adjacent code, comments, or formatting.
+- Don't refactor things that aren't broken.
+- Match existing style, even if you'd do it differently.
+- If you notice unrelated dead code, mention it — don't delete it.
 
-## Errors
+When your changes create orphans:
+- Remove imports/variables/functions that YOUR changes made unused.
+- Don't remove pre-existing dead code unless asked.
 
-- Fix errors autonomously. No hand-holding. Use logs and tests to diagnose.
+The test: every changed line should trace directly to the user's request.
 
-## Subagents
+## 4. Goal-Driven Execution
 
-- Delegate research/exploration/analysis to subagents. For complex problems, push max load to subagents.
+**Define success criteria. Loop until verified.**
 
-## Elegance
+Transform tasks into verifiable goals:
+- "Add validation" → "Write tests for invalid inputs, then make them pass"
+- "Fix the bug" → "Write a test that reproduces it, then make it pass"
+- "Refactor X" → "Ensure tests pass before and after"
 
-- For non-trivial changes: is there a more elegant solution? If it feels rushed, rewrite it.
+For multi-step tasks, state a brief plan:
+```
+1. [Step] → verify: [check]
+2. [Step] → verify: [check]
+```
 
-## Model Optimization
+Strong success criteria let you loop independently. Weak criteria ("make it work") require constant clarification.
 
-- On **Opus** with simple task (chat, question, minor change, code search): warn once → "This doesn't need Opus, use `/model sonnet`."
-- On **Sonnet** if failing 2+ times on same problem OR deep architectural reasoning across many files: warn → "Consider `/model opus`."
+## 5. Honesty
 
-## Compaction
+**If you don't know, say so.**
 
-Preserve when compacting: current task and status, modified files, errors and fixes, pending TODOs, architecture decisions, active git branch and feature.
+- Never hallucinate — if uncertain, state it explicitly at the start of your response.
+- Be self-critical. Don't just agree with the user; push back constructively when warranted.
+- If you made a mistake, analyze why and avoid repeating it.
+
+## 6. Planning
+
+**For non-trivial tasks, plan before coding.**
+
+A task is non-trivial if it touches multiple files, involves architecture decisions, or has ambiguity. Before writing any code:
+1. State the root cause or goal
+2. List the changes with file names
+3. Flag any open questions
+
+Wait for the user to validate the plan before implementing. Simple or obvious changes: implement directly.
+
+## 7. Verification
+
+**Never mark done without proving it works.**
+
+- Run tests, check logs, verify behavior in edge cases.
+- Filter: "Would a senior engineer approve this before shipping?"
+
+## 8. Errors
+
+**Fix errors autonomously. No hand-holding.**
+
+When something fails:
+- Use logs, error messages, and failing tests to diagnose.
+- Find the root cause — don't patch around it.
+- Fix CI tests that fail without asking what they mean.
+
+## 9. Subagents
+
+**Delegate research and exploration.**
+
+For complex problems, don't saturate the main context with investigation. Delegate:
+- Codebase exploration and analysis to subagents.
+- Research and multi-step lookups to subagents.
+- Push maximum computational load to subagents on hard problems.
+
+## 10. Elegance
+
+**Pause before delivering non-trivial work.**
+
+Ask: "Is there a more elegant solution?" If the implementation feels rushed or forced, rewrite it. A clean solution now saves rewrites later.
+
+Only applies to non-trivial changes — don't over-engineer simple fixes.
+
+## 11. Model Optimization
+
+**Use the right model for the task.**
+
+- On **Opus** with a simple task (chat, question, minor change, code search): warn once → *"This doesn't need Opus, use `/model sonnet` to save tokens."*
+- On **Sonnet** failing 2+ times on the same problem, or facing deep architectural reasoning across many files: warn → *"Consider `/model opus`."*
+
+Don't suggest upgrading just because the task is long — only when it requires complex multi-file reasoning.
+
+## 12. Compaction
+
+**Preserve what matters when the context window compresses.**
+
+When the conversation is compacted (manually or automatically), ensure the summary retains:
+- Current task and its status (in progress, blocked, done)
+- Modified files and relevant paths
+- Errors encountered and how they were resolved
+- Pending TODOs and next steps
+- Architecture or design decisions made
+- Active git branch and feature in development
 
 ---
 
-*Inspired by [Andrej Karpathy's LLM coding guidelines](https://github.com/multica-ai/andrej-karpathy-skills) and [Anthropic's Claude Code best practices](https://docs.anthropic.com/en/docs/claude-code).*
+**These guidelines are working if:** fewer unnecessary changes in diffs, fewer rewrites due to overcomplication, and clarifying questions come before implementation rather than after mistakes.
+
+---
+
+*Inspired by [Andrej Karpathy's LLM coding guidelines](https://github.com/multica-ai/andrej-karpathy-skills) and [Anthropic's official Claude Code best practices](https://docs.anthropic.com/en/docs/claude-code).*
