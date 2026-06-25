@@ -8,23 +8,6 @@ Inspired by [Andrej Karpathy's LLM coding guidelines](https://github.com/multica
 
 ---
 
-## Install
-
-### Claude Code — Global (all projects)
-```
-cp CLAUDE.md ~/.claude/CLAUDE.md
-```
-
-### Claude Code — Per project
-```
-cp CLAUDE.md /your-project/CLAUDE.md
-```
-
-### Cursor
-Copy `CURSOR.md` to `.cursor/rules/guidelines.mdc` inside your project, or paste the contents into your existing rules file.
-
----
-
 ## The Rules
 
 ### 4 core principles (from Karpathy)
@@ -57,6 +40,23 @@ LLMs fail in predictable ways:
 4. They mark things "done" without verifying
 
 These rules address each failure directly.
+
+---
+
+## Install
+
+### Claude Code — Global (all projects)
+```
+cp CLAUDE.md ~/.claude/CLAUDE.md
+```
+
+### Claude Code — Per project
+```
+cp CLAUDE.md /your-project/CLAUDE.md
+```
+
+### Cursor
+Copy `CURSOR.md` to `.cursor/rules/guidelines.mdc` inside your project, or paste the contents into your existing rules file.
 
 ---
 
